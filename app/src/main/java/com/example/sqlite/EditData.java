@@ -13,21 +13,23 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.HashMap;
 
-public class TemanBaru extends AppCompatActivity {
-    private TextInputEditText tnama,tTelpon;
+public class EditData extends AppCompatActivity {
     private Button simpanBtn;
-    String nm,tlp;
+    private TextInputEditText tnama,tTelpon;
+    String nm, tlp, id;
     DBController controller = new DBController(this);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teman_baru);
-
-        tnama = findViewById(R.id.tietNama);
-        tTelpon = findViewById(R.id.tietTelpon);
-        simpanBtn = findViewById(R.id.buttonSave);
-
+        setContentView(R.layout.activity_edit_data);
+        tnama = (TextInputEditText)findViewById(R.id.edNama);
+        tTelpon = (TextInputEditText)findViewById(R.id.edTelpon);
+        simpanBtn = (Button)findViewById(R.id.buttonSave);
+        id = getIntent().getStringExtra("id");
+        nm = getIntent().getStringExtra("nm");
+        tlp = getIntent().getStringExtra("tlp");
+        tnama.setText(nm);
+        tTelpon.setText(tlp);
         simpanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,16 +39,20 @@ public class TemanBaru extends AppCompatActivity {
                     nm= tnama.getText().toString();
                     tlp= tTelpon.getText().toString();
                     HashMap<String,String> qvalues = new HashMap<>();
+                    qvalues.put("id",id);
                     qvalues.put("nama",nm);
                     qvalues.put("telpon",tlp);
-                    controller.insertData(qvalues);
+                    controller.editData(qvalues);
                     callhome();
+                    Toast.makeText(getApplicationContext(),"Data Berhasil di ubah..",
+                            Toast.LENGTH_LONG).show();
                 }
             }
         });
+
     }
-    public void  callhome(){
-        Intent intent= new Intent(TemanBaru.this,MainActivity.class);
+    public void  callhome() {
+        Intent intent = new Intent(EditData.this, MainActivity.class);
         startActivity(intent);
         finish();
     }

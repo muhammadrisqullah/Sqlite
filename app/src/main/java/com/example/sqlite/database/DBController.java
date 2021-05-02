@@ -55,4 +55,19 @@ public class DBController extends SQLiteOpenHelper {
        return daftarTeman;
 
     }
+
+    public void deleteData(HashMap<String,String> queryValues){
+        SQLiteDatabase basisdata = this.getReadableDatabase();
+        basisdata.delete("teman","id" + " =?", new String[]{queryValues.get("id")});
+        basisdata.close();
+    }
+
+    public void editData(HashMap<String,String> queryValues){
+        SQLiteDatabase basisdata = this.getReadableDatabase();
+        ContentValues nilai = new ContentValues();
+        nilai.put("nama",queryValues.get("nama"));
+        nilai.put("telpon",queryValues.get("telpon"));
+        basisdata.update("teman",nilai,"id" +" =?", new String[]{queryValues.get("id")});
+        basisdata.close();
+    }
 }

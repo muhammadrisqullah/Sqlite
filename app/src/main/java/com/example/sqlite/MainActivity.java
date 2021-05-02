@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private TemanAdapter adapter;
     private ArrayList<Teman> temanArrayList;
     DBController controller = new DBController(this);
-    String id,nm,tlp;
     private FloatingActionButton fab;
 
     @Override

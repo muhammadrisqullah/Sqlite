@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Sqlite</string>
+    <string name="edit">Edit</string>
+    <string name="nama">Nama</string>
+    <string name="notel">Nomor Telfon</string>
+    <string name="detailkontak">Detail kontak</string>
+    <string name="hapus">Hapus</string>
+
 </resources>
